@@ -3,24 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Percentage Increase Calculator</title>
+    <title>Homepage | Percentage Calculator</title>
     <style>
         /* --- Google Fonts --- */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-        /* --- General Styling & Theme --- */
+        /* --- General Page Styling --- */
         body {
             font-family: 'Poppins', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
             margin: 0;
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: #fff;
+            line-height: 1.6;
         }
 
-        /* --- Calculator Container --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3 {
+            font-weight: 600;
+        }
+
+        /* --- Header/Navigation --- */
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        
+        /* --- Hero Section --- */
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+            opacity: 0.9;
+        }
+
+        /* --- Call to Action (CTA) Section --- */
+        .cta {
+            background: rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 50px 20px;
+            border-radius: 15px;
+            margin: 40px 0;
+        }
+
+        .cta h2 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #fff;
+            color: #667eea;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-2px);
+        }
+
+        /* === PERCENTAGE CALCULATOR SECTION === */
+        /* This section wrapper centers the calculator on the page */
+        #calculator-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 20px;
+        }
+        
         .calculator-container {
             background: rgba(255, 255, 255, 0.1);
             padding: 40px;
@@ -29,18 +129,17 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             text-align: center;
-            width: 90%;
+            width: 100%;
             max-width: 400px;
         }
 
-        h2 {
+        .calculator-container h2 {
             margin-top: 0;
             margin-bottom: 25px;
             font-weight: 600;
             font-size: 1.8rem;
         }
 
-        /* --- Input Fields --- */
         .input-group {
             margin-bottom: 20px;
             text-align: left;
@@ -59,7 +158,7 @@
             border: 1px solid rgba(255, 255, 255, 0.3);
             background: rgba(255, 255, 255, 0.15);
             border-radius: 8px;
-            box-sizing: border-box; /* Important for padding */
+            box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
             font-size: 1rem;
             color: #fff;
@@ -76,8 +175,7 @@
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
         }
         
-        /* --- Button Styling --- */
-        button {
+        .calculator-container button {
             width: 100%;
             padding: 15px;
             border: none;
@@ -91,13 +189,12 @@
             margin-top: 10px;
         }
 
-        button:hover {
+        .calculator-container button:hover {
             background-color: #f0f0f0;
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
         }
 
-        /* --- Result Display --- */
         #result {
             margin-top: 25px;
             font-size: 1.4rem;
@@ -116,21 +213,121 @@
             transform: translateY(0);
         }
 
-        .increase {
-            color: #a7f3d0; /* Light Green */
-        }
+        .increase { color: #a7f3d0; } /* Light Green */
+        .decrease { color: #fca5a5; } /* Light Red */
 
-        .decrease {
-            color: #fca5a5; /* Light Red */
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
         }
+        
     </style>
 </head>
 <body>
 
-    <div class="calculator-container">
-        <h2>Percentage Change</h2>
-        <div class="input-group">
-            <label for="initialValue">Initial Value (From)</label>
-            <input type="number" id="initialValue" placeholder="e.g., 100" />
+    <!-- Header Navigation -->
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">Calcify</a>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#calculator-section">Calculator</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Powerful & Simple Calculation Tools</h1>
+            <p>Welcome to our website. We provide easy-to-use tools to help with your daily calculations. Scroll down to try our percentage change calculator.</p>
+        </section>
+
+        <!-- Call to Action (CTA) Section -->
+        <section class="cta">
+            <h2>Ready to Calculate?</h2>
+            <p>Our featured tool is just below. Get started now!</p>
+            <a href="#calculator-section" class="cta-button">Go to Calculator</a>
+        </section>
+    </main>
+
+    <!-- Appended Percentage Calculator Section -->
+    <section id="calculator-section">
+        <div class="calculator-container">
+            <h2>Percentage Change</h2>
+            <div class="input-group">
+                <label for="initialValue">Initial Value (From)</label>
+                <input type="number" id="initialValue" placeholder="e.g., 100" />
+            </div>
+            <div class="input-group">
+                <label for="finalValue">Final Value (To)</label>
+                <input type="number" id="finalValue" placeholder="e.g., 150" />
+            </div>
+            <button id="calculateBtn">Calculate</button>
+            <p id="result"></p>
         </div>
-        <div class
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Calcify. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Calculator Logic ---
+        const initialValueInput = document.getElementById('initialValue');
+        const finalValueInput = document.getElementById('finalValue');
+        const calculateBtn = document.getElementById('calculateBtn');
+        const resultDisplay = document.getElementById('result');
+
+        calculateBtn.addEventListener('click', () => {
+            const initialValue = parseInt(initialValueInput.value);
+            const finalValue = parseInt(finalValueInput.value);
+
+            resultDisplay.textContent = '';
+            resultDisplay.classList.remove('show', 'increase', 'decrease');
+
+            // Input Validation
+            if (isNaN(initialValue) || isNaN(finalValue)) {
+                resultDisplay.textContent = 'Please enter valid numbers.';
+                resultDisplay.classList.add('show', 'decrease');
+                return;
+            }
+
+            if (initialValue === 0) {
+                resultDisplay.textContent = 'Initial value cannot be zero.';
+                resultDisplay.classList.add('show', 'decrease');
+                return;
+            }
+
+            // Calculation
+            const difference = finalValue - initialValue;
+            const percentageChange = (difference / initialValue) * 100;
+            const roundedPercentage = percentageChange.toFixed(2);
+
+            // Display Result
+            if (percentageChange > 0) {
+                resultDisplay.textContent = `Increase: ${roundedPercentage}%`;
+                resultDisplay.classList.add('increase');
+            } else if (percentageChange < 0) {
+                resultDisplay.textContent = `Decrease: ${Math.abs(roundedPercentage)}%`;
+                resultDisplay.classList.add('decrease');
+            } else {
+                resultDisplay.textContent = 'No Change: 0%';
+            }
+            
+            // Trigger animation
+            setTimeout(() => {
+                resultDisplay.classList.add('show');
+            }, 10);
+        });
+    </script>
+
+</body>
+</html>
